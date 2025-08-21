@@ -1,0 +1,45 @@
+🔐 3. Configuração da Service Account
+No Google Cloud Console, crie um projeto.
+Vá em IAM e administrador > Contas de serviço
+Crie uma nova conta de serviço e baixe o arquivo oauth2service.json
+Ative a Admin SDK API no projeto
+
+🔄 4. Delegação em todo o domínio
+Acesse: https://admin.google.com
+Vá em Segurança > Controles de API > Delegação em todo o domínio
+Clique em Adicionar novo ID de cliente
+Insira:
+ID do cliente: está no oauth2service.json
+Escopos: https://www.googleapis.com/auth/admin.directory.group.readonly,https://www.googleapis.com/auth/admin.directory.user.readonly
+
+⚙️ 5. Teste de conexão: 
+gam user seu.email@dominio.com check serviceaccount
+
+📤 6. Comandos para exportar dados
+Exportar todos os grupos: 
+gam user seu.email@dominio.com print groups > grupos.csv
+
+Exportar todos os membros de todos os grupos: gam user seu.email@dominio.com print group-members > membros_grupos.csv
+
+🧩 7. Solução de problemas
+Erro 403 - Insufficient Permissions: verifique se os escopos foram autorizados corretamente.
+gam não reconhecido: adicione o caminho do GAM ao PATH do sistema.
+Service Account sem acesso: confirme se o e-mail delegado é administrador.
+
+📁 Estrutura sugerida do repositório
+📦 gam-exportador
+ ┣ 📄 README.md
+ ┣ 📁 exemplos/
+ ┃ ┗ 📄 grupos.csv
+ ┃ ┗ 📄 membros_grupos.csv
+ ┗ 📁 docs/
+    ┗ 📄 oauth2service.json (não subir publicamente)
+
+🧪 Teste rápido
+
+gam version
+gam user seu.email@dominio.com print groups
+
+📎 Referências
+Documentação oficial do GAM
+Admin SDK Directory API
